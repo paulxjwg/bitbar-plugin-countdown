@@ -5,8 +5,9 @@ from datetime import date
 
 # add your events and deadlines into the dictionary
 klausuren = {
-    "exam 1": date(2019, 9, 24),
-    "exam 2": date(2019, 12, 31)
+    "Klausur 1": date(2019, 9, 24),
+    "Klausur 2": date(2019, 12, 31),
+    "Klausur 3": date(2019, 9, 2)
 }
 daysList = {}
 today = date.today()
