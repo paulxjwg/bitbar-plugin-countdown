@@ -2,15 +2,19 @@
 # -*- coding: utf-8 -*-
 
 from datetime import date
+import operator
 
 # add your events and deadlines into the dictionary
 klausuren = {
-    "Klausur 1": date(2019, 9, 24),
-    "Klausur 2": date(2019, 12, 31),
-    "Klausur 3": date(2019, 9, 2)
+    "Mathe": date(2019, 9, 12),
+    "Latein": date(2019, 12, 31),
+    "Spanisch": date(2019, 9, 2)
 }
 daysList = {}
 today = date.today()
+
+# convert dictionary into sorted tuple
+klausuren_sorted = sorted(klausuren.items(), key=operator.itemgetter(1))
 
 
 # calculate empty spaces for printing
@@ -21,11 +25,10 @@ def empty(klausur):
 
 
 # get days until Klausur
-for klausur, date in sorted(klausuren.items()):
+for klausur, date in klausuren_sorted:
     delta = date - today
     days = delta.days
     daysList[days] = klausur
-
 nextKlausur = min(daysList.keys())
 
 # show next Klausur in menubar
@@ -33,13 +36,14 @@ if nextKlausur > 0:
     if nextKlausur > 7:
         weeks = nextKlausur // 7
         restDays = nextKlausur % 7
-        print(str("📚" + daysList.get(nextKlausur)) + " " + str(weeks) + "W, " + str(restDays) + "T")
+        print(str("📚" + daysList.get(nextKlausur)) + " " + (
+            str(weeks) + "W, " + str(restDays) + "T" if restDays > 0 else str(weeks) + "W"))
     else:
         print(str("📚" + daysList.get(nextKlausur)) + " " + str(nextKlausur) + "T")
 print("---")
 
 # print data
-for klausur, date in sorted(klausuren.items()):
+for klausur, date in klausuren_sorted:
     delta = date - today
     days = delta.days
 
@@ -47,9 +51,15 @@ for klausur, date in sorted(klausuren.items()):
         if days > 7:
             weeks = days // 7
             restDays = days % 7
-            print(klausur + ":" + empty(klausur) + "noch " + (
-                str(weeks) if weeks > 9 else "0" + str(weeks)) + " Wochen, " + str(restDays) + (" Tage " if restDays > 1 else " Tag  ") + "(" + str(
-                date) + ") | font=Menlo size=14") # color=white
-
+            if restDays == 0:
+                print(klausur + ":" + empty(klausur) + "noch " + (
+                    str(weeks) if weeks > 9 else "0" + str(weeks)) + " Wochen         (" + str(
+                    date) + ") | font=Menlo size=14") # you can change the font, you should use a monospaced font for best results
+            else:
+                print(klausur + ":" + empty(klausur) + "noch " + (
+                    str(weeks) if weeks > 9 else "0" + str(weeks)) + " Wochen, " + str(restDays) + (
+                          " Tage " if restDays > 1 else " Tag  ") + "(" + str(
+                    date) + ") | font=Menlo size=14")
         else:
-            print(klausur + ": noch " + str(days) + " Tage (" + str(date) + ")")
+            print(klausur + ":" + empty(klausur) + "noch 0" + str(days) + " Tage           (" + str(
+                date) + ") | font=Menlo size=14") # color=white
