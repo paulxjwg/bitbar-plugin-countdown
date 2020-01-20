@@ -8,6 +8,7 @@ Der nächste Termin wird direkt in der Menubar gezeigt, der Status der anderen k
 - automatische Sortierung
 - Zeigt nächsten Termin direkt in der Menubar an
 - Zeit wird elegant in X Wochen, Y Tage angezeigt
+- Hervorhebung der restlichen Zeit durch anpassbare Farbskala
 
 ## ⚙️ How to install
 1. Installiere [BitBar](https://github.com/matryer/bitbar)
