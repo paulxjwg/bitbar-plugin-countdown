@@ -7,8 +7,8 @@ import operator
 # add your events and deadlines into the dictionary
 klausuren = {
     "Mathe": date(2019, 9, 12),
-    "Latein": date(2019, 12, 31),
-    "Spanisch": date(2019, 9, 2)
+    "Latein": date(2019, 7, 5),
+    "Spanisch": date(2019, 7, 3)
 }
 daysList = {}
 today = date.today()
@@ -48,18 +48,42 @@ for klausur, date in klausuren_sorted:
     days = delta.days
 
     if days > 0:
-        if days > 7:
-            weeks = days // 7
-            restDays = days % 7
-            if restDays == 0:
-                print(klausur + ":" + empty(klausur) + "noch " + (
-                    str(weeks) if weeks > 9 else "0" + str(weeks)) + " Wochen         (" + str(
-                    date) + ") | font=Menlo size=14") # you can change the font, you should use a monospaced font for best results
-            else:
-                print(klausur + ":" + empty(klausur) + "noch " + (
-                    str(weeks) if weeks > 9 else "0" + str(weeks)) + " Wochen, " + str(restDays) + (
-                          " Tage " if restDays > 1 else " Tag  ") + "(" + str(
-                    date) + ") | font=Menlo size=14")
+        weeks = days // 7
+        restDays = days % 7
+        tagenull = ""
+
+        if restDays == 1:
+            tagetitle = "Tag "
+        elif restDays == 0:
+            tagetitle = ""
+            tagenull = ""
+            restDays = ""
+            weekcomma = "     "
         else:
-            print(klausur + ":" + empty(klausur) + "noch 0" + str(days) + " Tage           (" + str(
-                date) + ") | font=Menlo size=14") # color=white
+            tagetitle = "Tage"
+
+        if days > 7:
+            if weeks < 10:
+                weeksfiller = "0"
+            else:
+                weeksfiller = ""
+
+            if days > 14:
+                weektitle = "Wochen"
+            else:
+                weektitle = "Woche "
+
+            weekcomma = ", "
+            noweekspace = ""
+
+
+        else:
+            weeksfiller = ""
+            weeks = ""
+            weekcomma = ""
+            weektitle = ""
+            noweekspace = "          "
+
+        print("{}:{}noch {}{} {}{}{}{} {} {}({}) | font=Menlo size=14 terminal=false bash=''".format(klausur, empty(klausur), weeksfiller,
+                                                                                 str(weeks), weektitle, weekcomma,
+                                                                                 tagenull, restDays, tagetitle, noweekspace, date))
