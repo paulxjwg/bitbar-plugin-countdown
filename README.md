@@ -1,5 +1,7 @@
 # BitBar Plugin - Klausuren/Ereignis Countdown
-![screenshot bitbar plugin countdown](images/screenshot.png)
+![screenshot bitbar plugin countdown detailview](images/screenshot1.png)
+
+![screenshot bitbar plugin countdown overview](images/screenshot2.png)
 
 Dieses Python Script zeigt deine nächsten Termine/Klausuren mit Countdown in der Menubar an.
 Der nächste Termin wird direkt in der Menubar gezeigt, der Status der anderen kann mit Hilfe eines Klicks auf das Plugin in der Menubar eingesehen werden.
